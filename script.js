@@ -117,10 +117,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const submitButton = contactForm.querySelector('button[type="submit"]');
         contactForm.insertBefore(messageDiv, submitButton);
 
-        // Auto-remove after 5 seconds
+        // Auto-remove after 10 seconds for better accessibility
         setTimeout(() => {
             messageDiv.remove();
-        }, 5000);
+        }, 10000);
     }
 
     // Add animation on scroll for elements
