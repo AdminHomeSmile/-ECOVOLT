@@ -69,18 +69,53 @@ document.addEventListener('DOMContentLoaded', function() {
         contactForm.addEventListener('submit', function(e) {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
             
-            // Basic validation
-            if (name && email && message) {
-                alert('Thank you for your message! We will get back to you soon.');
-                contactForm.reset();
-            } else {
-                alert('Please fill in all fields.');
+            // Email validation regex
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            // Validation with better user feedback
+            if (!name || !email || !message) {
+                showFormMessage('Please fill in all fields.', 'error');
+                return;
             }
+            
+            if (!emailRegex.test(email)) {
+                showFormMessage('Please enter a valid email address.', 'error');
+                return;
+            }
+            
+            // Success
+            showFormMessage('Thank you for your message! We will get back to you soon.', 'success');
+            contactForm.reset();
         });
+    }
+
+    // Helper function to show form messages
+    function showFormMessage(message, type) {
+        // Remove any existing message
+        const existingMessage = document.querySelector('.form-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        // Create new message element
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `form-message form-message-${type}`;
+        messageDiv.textContent = message;
+        messageDiv.setAttribute('role', 'alert');
+        messageDiv.setAttribute('aria-live', 'polite');
+        
+        // Insert message before submit button
+        const submitButton = contactForm.querySelector('button[type="submit"]');
+        contactForm.insertBefore(messageDiv, submitButton);
+
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            messageDiv.remove();
+        }, 5000);
     }
 
     // Add animation on scroll for elements
