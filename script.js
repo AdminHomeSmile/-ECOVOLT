@@ -7,7 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Toggle mobile menu
     if (hamburger) {
         hamburger.addEventListener('click', function() {
+            const isExpanded = navMenu.classList.contains('active');
             navMenu.classList.toggle('active');
+            
+            // Update ARIA attribute
+            hamburger.setAttribute('aria-expanded', !isExpanded);
             
             // Animate hamburger
             const spans = hamburger.querySelectorAll('span');
@@ -28,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function() {
             if (navMenu.classList.contains('active')) {
                 navMenu.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
                 const spans = hamburger.querySelectorAll('span');
                 spans[0].style.transform = 'none';
                 spans[1].style.opacity = '1';
