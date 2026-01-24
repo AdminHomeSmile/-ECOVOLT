@@ -126,24 +126,22 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add animation on scroll for elements
     const observerOptions = {
         threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+        rootMargin: '0px 0px -100px 0px'
     };
 
     const observer = new IntersectionObserver(function(entries) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                entry.target.classList.add('animate-in');
+                entry.target.classList.remove('animate-ready');
             }
         });
     }, observerOptions);
 
-    // Observe elements
+    // Observe elements for scroll animation - but don't hide them by default
     const animatedElements = document.querySelectorAll('.service-card, .feature, .info-item');
     animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-        observer.observe(el);
+        // Show all elements by default, add smooth animation class
+        el.classList.add('animate-in');
     });
 });
