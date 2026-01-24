@@ -123,25 +123,9 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 10000);
     }
 
-    // Add animation on scroll for elements
-    const observerOptions = {
-        threshold: 0.1,
-        rootMargin: '0px 0px -100px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-in');
-                entry.target.classList.remove('animate-ready');
-            }
-        });
-    }, observerOptions);
-
-    // Observe elements for scroll animation - but don't hide them by default
+    // Show all elements immediately with animation class
     const animatedElements = document.querySelectorAll('.service-card, .feature, .info-item');
     animatedElements.forEach(el => {
-        // Show all elements by default, add smooth animation class
         el.classList.add('animate-in');
     });
 });
