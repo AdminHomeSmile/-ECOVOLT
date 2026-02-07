@@ -1,4 +1,4 @@
-# 🎁 Loyalty Rewards Hub
+# 🎁 ECOVOLT - Loyalty Rewards Hub
 
 A fully functional static website for a loyalty rewards platform that helps retailers and distributors reward customers through receipt scanning and points systems.
 

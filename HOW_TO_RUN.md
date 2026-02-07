@@ -51,7 +51,7 @@ npx http-server -p 8000
 ### โครงสร้างไฟล์ (File Structure)
 
 ```
--ECOVOLT/
+ECOVOLT/
 ├── index.html      # หน้าเว็บหลัก
 ├── styles.css      # ไฟล์ CSS สำหรับการตกแต่ง
 ├── script.js       # ไฟล์ JavaScript สำหรับ interactivity
