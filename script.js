@@ -33,6 +33,15 @@ function showStatus(message, type = 'info') {
   statusMessage.textContent = message;
 }
 
+function escapeHtml(value) {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 function round(value) {
   return Math.round(value * 10) / 10;
 }
@@ -92,8 +101,8 @@ function renderFoodTable() {
   state.foods.forEach(item => {
     const row = document.createElement('tr');
     row.innerHTML = `
-      <td>${item.name}</td>
-      <td>${item.servingText} × ${item.servings}</td>
+      <td>${escapeHtml(item.name)}</td>
+      <td>${escapeHtml(item.servingText)} × ${escapeHtml(item.servings)}</td>
       <td>${round(item.calories)}</td>
       <td>${round(item.protein)}</td>
       <td>${round(item.carbs)}</td>
@@ -151,7 +160,7 @@ function renderMealPlan(targets, mealsPerDay) {
       <td>${mealProtein}</td>
       <td>${mealCarbs}</td>
       <td>${mealFat}</td>
-      <td>${presetMenuIdeas[(i - 1) % presetMenuIdeas.length]}</td>
+      <td>${escapeHtml(presetMenuIdeas[(i - 1) % presetMenuIdeas.length])}</td>
     `;
     planTableBody.appendChild(row);
   }
